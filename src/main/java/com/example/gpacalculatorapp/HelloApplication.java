@@ -24,12 +24,13 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-       openHomePage(stage);
+        openHomePage(stage);
 
     }
 
@@ -54,14 +55,19 @@ public class HelloApplication extends Application {
         button5.setOnAction(e -> openEnrolledCourses(stage));
 
         Scene scene = new Scene(layout, 800, 500);
+
+        //style part
+        pageStyle(scene, layout);
+
         stage.setScene(scene);
         stage.setTitle("Home");
         stage.show();
     }
 
     private void  openEnrollCourse(Stage primaryStage) {
-        TextField textField1 = new TextField("Enter course id");
-        TextField textField2 = new TextField("Enter student id");
+        TextField textField1 = new TextField(); // course id
+        TextField textField2 = new TextField();// student id
+
         Button enrollBtn = new Button("Enroll");
         Button homeBtn = new Button("Go To Home");
         TextArea confirmMessage = new TextArea();
@@ -101,6 +107,11 @@ public class HelloApplication extends Application {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(textField1, textField2, confirmMessage, homeBtn, enrollBtn);
         Scene scene = new Scene(layout, 800, 500);
+        // Style Part
+        pageStyle(scene, layout);
+        textField1.setPromptText("Enter course id");
+        textField2.setPromptText("Enter student id");
+//
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -112,7 +123,7 @@ public class HelloApplication extends Application {
     }
 
     private void openGpaCalculator(Stage primaryStage) {
-        TextField textField1 = new TextField("Enter student id");
+        TextField textField1 = new TextField(); // student id
         Button calcBtn = new Button("Calculate GPA");
         Button homeBtn = new Button("Go To Home");
         TextArea confirmMessage = new TextArea();
@@ -151,6 +162,10 @@ public class HelloApplication extends Application {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(textField1, calcBtn, homeBtn, confirmMessage);
         Scene scene = new Scene(layout, 800, 500);
+        // Style Part
+        pageStyle(scene, layout);
+        textField1.setPromptText("Enter student id");
+        //
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -162,9 +177,9 @@ public class HelloApplication extends Application {
     }
 
     private void openInsertingDegree(Stage primaryStage) {
-        TextField textField1 = new TextField("Enter course id");
-        TextField textField2 = new TextField("Enter student id");
-        TextField textField3 = new TextField("Enter student mark");
+        TextField textField1 = new TextField(); // course id
+        TextField textField2 = new TextField(); // student id
+        TextField textField3 = new TextField(); // student mark
 
         Button updateBtn = new Button("Update Degree");
         Button homeBtn = new Button("Go To Home");
@@ -205,7 +220,13 @@ public class HelloApplication extends Application {
 
         VBox layout = new VBox(10);
         layout.getChildren().addAll(textField1, textField2, textField3, homeBtn, updateBtn, confirmMessage);
-        Scene scene = new Scene(layout, 800, 500);
+        Scene scene = new Scene(layout, 800, 600);
+        // Style Part
+        pageStyle(scene, layout);
+        textField1.setPromptText("Enter course id");
+        textField2.setPromptText("Enter student id");
+        textField3.setPromptText("Enter student mark");
+
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -218,7 +239,7 @@ public class HelloApplication extends Application {
     }
 
     private void openSuggestCourses(Stage primaryStage) {
-        TextField textField1 = new TextField("Enter student id");
+        TextField textField1 = new TextField(); // student id
         Button suggest = new Button("Suggest Courses");
         Button homeBtn = new Button("Go To Home");
         TextArea confirmMessage = new TextArea();
@@ -257,7 +278,12 @@ public class HelloApplication extends Application {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(textField1, homeBtn, suggest, confirmMessage);
         Scene scene = new Scene(layout, 800, 500);
+        // Style Part
+        pageStyle(scene, layout);
+        textField1.setPromptText("Enter student id");
+        //
         primaryStage.setScene(scene);
+
         primaryStage.show();
 
         homeBtn.setOnAction(e -> {
@@ -269,7 +295,7 @@ public class HelloApplication extends Application {
     }
 
     private void openEnrolledCourses(Stage primaryStage) {
-        TextField textField1 = new TextField("Enter student id");
+        TextField textField1 = new TextField(); // student id
         Button getEnrolledBtn = new Button("Get Enrolled Courses");
         Button homeBtn = new Button("Go To Home");
         TextArea confirmMessage = new TextArea();
@@ -308,6 +334,10 @@ public class HelloApplication extends Application {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(textField1, homeBtn, getEnrolledBtn, confirmMessage);
         Scene scene = new Scene(layout, 800, 500);
+        // style Part
+        pageStyle(scene, layout);
+        textField1.setPromptText("Enter student id");
+        //
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -368,4 +398,11 @@ public class HelloApplication extends Application {
         return responseMessage;
 
     }
+    // Styling Functions
+    private void pageStyle(Scene scene, VBox layout){
+        layout.getStyleClass().add("layout");
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style.css")).toExternalForm());
+    }
+
+
 }
